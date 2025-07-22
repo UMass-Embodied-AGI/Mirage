@@ -77,7 +77,7 @@ We provide a sample dataset of 100 examples for the VSP spatial reasoning task. 
 {
     "text_input": "Question",
     "text_output": "Answer",
-    "image_input": ["input1.jpg"],
+    "image_input": "input1.jpg",
     "image_output": "helper_image.jpg"
 }
 ```
