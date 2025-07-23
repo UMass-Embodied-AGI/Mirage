@@ -42,9 +42,9 @@ We propose **Mirage**, **interleaving latent visual tokens**, which represent co
     <li>
       <a href="#training">Training</a>
     </li>
-    <!-- <li>
+    <li>
       <a href="#inference">Inference</a>
-    </li> -->
+    </li>
     <li>
       <a href="#citation">Citation</a>
     </li>
