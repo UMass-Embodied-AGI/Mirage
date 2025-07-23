@@ -55,7 +55,8 @@ We propose **Mirage**, **interleaving latent visual tokens**, which represent co
 </details>
 
 ## News
-- [2025-07-09] We have released our training data for VSP spatial planning and spatial reasoning tasks.
+- [2025-07-23] We have released our test code, data, and model weights for VSP spatial planning task.
+- [2025-07-09] We have released our training data for VSP spatial planning task.
 - [2025-06-19] We have released the training code!
 
 ## Installation
@@ -82,11 +83,12 @@ We provide a sample dataset of 100 examples for the VSP spatial reasoning task. 
 }
 ```
 
-We also provide the training data for VSP spatial planning tasks. To extract the contents:
+We also provide the training and test data for VSP spatial planning task. To extract the contents:
 
 ```bash
 cd ./data/vsp_spatial_planning
 tar -xzf vsp_spatial_planning.tar.gz
+tar -xzf vsp_spatial_planning_test.tar.gz
 ```
 
 ## Training
@@ -128,7 +130,19 @@ python src/main.py \
     --cache_dir PATH_TO_HF_CACHE
 ```
 
-<!-- ## Inference -->
+## Inference
+
+You can run the test code using the command below. Currently, we provide model checkpoints for the VSP spatial planning task training without CoT.
+We will continue updating the model weights and scaling the dataset to further improve performance.
+
+```bash
+python src/test.py \
+    --model Qwen/Qwen2.5-VL-7B-Instruct --epochs 15 \
+    --task vsp-spatial-planning \
+    --data_path ./data/vsp_spatial_planning/test_direct.jsonl \
+    --load_model_path Miiche/vsp_spatial_planning_direct_sft  \
+    --cache_dir PATH_TO_HF_CACHE
+```
 
 
 ## Citation

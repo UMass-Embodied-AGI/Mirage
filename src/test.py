@@ -29,10 +29,10 @@ logging.info(args)
 logging.info('=='*20)
     
 # Load the model and processor
-cache_dir = 'PathToHFCache'
+cache_dir = args.cache_dir
 os.environ['HF_HOME'] = cache_dir
 
-processor = AutoProcessor.from_pretrained(args.load_model_path, cache_dir=cache_dir)
+processor = AutoProcessor.from_pretrained(args.load_model_path, trust_remote_code=True, cache_dir=cache_dir)
 model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.load_model_path, device_map="auto", torch_dtype=torch.bfloat16)
 
 processor.tokenizer.add_tokens("<|latent_pad|>", special_tokens=True)
