@@ -16,6 +16,7 @@ def get_args():
 
     parser.add_argument("--latent_size", type=int, default=4)
     parser.add_argument("--compress_strategy", type=str, default='average', choices=['average'])
+    parser.add_argument("--gradient_accumulation_steps", type=int, default=1)  # Gradient accumulation steps
     
     parser.add_argument("--epochs", type=int, default=10)   
     

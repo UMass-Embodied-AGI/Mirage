@@ -41,9 +41,11 @@ processor.tokenizer.add_tokens("<|latent_end|>", special_tokens=True)
 if args.stage in ['stage1']: 
     model_path = args.model
     config = Qwen2_5_VLConfig.from_pretrained(model_path, cache_dir=cache_dir)
+    grad_checkpointing = True
 elif args.stage in ['stage2']:
     model_path = args.load_model_path
     config = Qwen2_5_VLConfig.from_pretrained(model_path)
+    grad_checkpointing = False
 
 config.compress_strategy = args.compress_strategy
 config.latent_size = args.latent_size
@@ -175,7 +177,7 @@ training_args = SFTConfig(
     output_dir=args.save_model_path,
     num_train_epochs=args.epochs,
     per_device_train_batch_size=1,
-    gradient_accumulation_steps=8,
+    gradient_accumulation_steps=args.gradient_accumulation_steps,
     warmup_steps=10,
     learning_rate=1e-5,
     weight_decay=0.01,
@@ -187,7 +189,7 @@ training_args = SFTConfig(
     bf16=True,
     push_to_hub=False,
     remove_unused_columns=False,
-    gradient_checkpointing=True,
+    gradient_checkpointing=grad_checkpointing,
     dataset_text_field="",
     dataset_kwargs={"skip_prepare_dataset": True},
     report_to=[],

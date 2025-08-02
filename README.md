@@ -107,10 +107,11 @@ The base model (Qwen2.5-VL) will be automatically downloaded in `./cache`, speci
 ```bash
 python src/main.py \
     --model Qwen/Qwen2.5-VL-7B-Instruct --epochs 15 \
-    --task vsp-spatial-reasoning \
+    --task vsp-spatial-planning \
     --latent_size 4 \
+    --gradient_accumulation_steps 8 \
     --stage stage1 \
-    --data_path ./data/examples/sample.jsonl \
+    --data_path ./data/vsp_spatial_planning/train_direct.jsonl \
     --log_file ./log.txt \
     --save_model_path ./checkpoints/model_stage1  \
     --cache_dir PATH_TO_HF_CACHE
@@ -120,10 +121,11 @@ python src/main.py \
 ```bash
 python src/main.py \
     --model Qwen/Qwen2.5-VL-7B-Instruct --epochs 15 \
-    --task vsp-spatial-reasoning \
+    --task vsp-spatial-planning \
     --latent_size 4 \
+    --gradient_accumulation_steps 1 \
     --stage stage2 \
-    --data_path ./data/examples/sample.jsonl \
+    --data_path ./data/vsp_spatial_planning/train_direct.jsonl \
     --log_file ./log.txt \
     --load_model_path ./checkpoints/model_stage1 \
     --save_model_path ./checkpoints/model_stage2 \
